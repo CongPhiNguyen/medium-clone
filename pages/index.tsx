@@ -1,7 +1,18 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Header from '../components/Header'
-const Home: NextPage = () => {
+import { useEffect, useState } from 'react';
+import { GetServerSideProps } from 'next';
+import axios from 'axios';
+interface IData {
+  run: boolean
+}
+
+export function Home(data: IData) {
+  // console.log("pageComponentProps", pageComponentProps);
+  console.log(data);
+  const [pageData, setPageData] = useState<IData>();
+  useEffect(() => setPageData(data));
   return (
     <div className="">
       <Head>
@@ -28,10 +39,27 @@ const Home: NextPage = () => {
         </div>
       </div>
       <div>
-        
+        {JSON.stringify(pageData)}
       </div>
     </div>
   )
 }
 
-export default Home
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // let result: any;
+  // const data = axios.get(`http://localhost:3000/api/test`,{})
+  //   .then(res => {
+  //       // result = res.data.data;
+  //       console.log("res", res);
+  //   })
+  //   .catch(err => {
+  // })
+  // console.log(result);
+  return {
+    props: {
+      run: true
+    }
+  }
+}
+
+export default Home;

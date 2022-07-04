@@ -7,5 +7,4 @@ const postSchema = new mongoose.Schema({
   description: String,
   imgUrl: String,
 })
-
-module.exports = mongoose.models.posts || mongoose.model('post', postSchema);
+export default mongoose.models.posts || mongoose.model("post", postSchema);
